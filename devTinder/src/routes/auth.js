@@ -16,7 +16,7 @@ authRouter.post("/signup", rateLimiter(5, 60, "signup"), async(req, res) => {
         const savedUser = await user.save();
 
         const emailRes = await sendEmail.run("Welcome to DevTinder!", "We welcome you to the amazing community of DevTinder we hope you enjoy the company.");
-
+        console.log("working")
         const token = await user.getJwt();
         res.cookie("token", token, {expires: new Date(Date.now() + 7*24*60*60*1000)});
         res.json({message:"SignUp successfull", data: savedUser});
